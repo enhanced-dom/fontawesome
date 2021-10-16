@@ -1,0 +1,1 @@
+Fontawesome icon adapter for @enhanced-dom/icon
