@@ -1,9 +1,7 @@
-import { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import { icon, library as faLib } from '@fortawesome/fontawesome-svg-core'
-import { IAbstractElement } from '@enhanced-dom/webcomponent'
+import { icon, IconDefinition, library as faLib } from '@fortawesome/fontawesome-svg-core'
+import type { IAbstractElement } from '@enhanced-dom/webcomponent'
 import classNames from 'classnames'
 import uniqueId from 'lodash.uniqueid'
-import { IIconInterpreter } from '@enhanced-dom/icon'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 const concatenateStyles = (...styles: string[]) => {
@@ -14,10 +12,20 @@ const concatenateStyles = (...styles: string[]) => {
   return meaningfulStyles.join(';')
 }
 
-export class FontawesomeIconRenderer implements IIconInterpreter<IconDefinition, any> {
+export class FontawesomeIconRenderer {
   static registeredIcons = []
   private _titleId = uniqueId('fontawesome-icon-')
-  public getIcon = ({ config, title, style = '', ...rest }) => {
+  public getIcon = <T extends IconDefinition>({
+    config,
+    title,
+    style = '',
+    ...rest
+  }: {
+    config: T
+    title?: string
+    style?: string
+    class?: string
+  }) => {
     faLib.add(config)
     const renderedIcon = icon(config)
 
@@ -39,7 +47,7 @@ export class FontawesomeIconRenderer implements IIconInterpreter<IconDefinition,
 
     if (title) {
       abstractElement.attributes['aria-labelledby'] = this._titleId
-      const titleElement = { tag: 'title', attributes: { id: this._titleId }, children: [title] }
+      const titleElement = { tag: 'title', attributes: { id: this._titleId }, children: [{ content: title }] }
       abstractElement.children.unshift(titleElement)
     }
 
