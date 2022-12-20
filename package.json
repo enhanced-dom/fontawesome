@@ -1,6 +1,6 @@
 {
   "name": "@enhanced-dom/fontawesome",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Fontawesome icon adapter for @enhanced-dom/icon",
   "repository": "https://github.com/enhanced-dom/fontawesome.git",
   "main": "index.js",

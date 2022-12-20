@@ -2,7 +2,6 @@ import { icon, IconDefinition, library as faLib } from '@fortawesome/fontawesome
 import type { IAbstractElement } from '@enhanced-dom/webcomponent'
 import classNames from 'classnames'
 import uniqueId from 'lodash.uniqueid'
-import '@fortawesome/fontawesome-svg-core/styles.css'
 
 const concatenateStyles = (...styles: string[]) => {
   const meaningfulStyles = styles.filter((s) => !!s)
