@@ -1,5 +1,5 @@
-import { icon, IconDefinition, library as faLib } from '@fortawesome/fontawesome-svg-core'
-import type { IAbstractElement } from '@enhanced-dom/webcomponent'
+import { icon, type IconDefinition, library as faLib } from '@fortawesome/fontawesome-svg-core'
+import { type IAbstractElement } from '@enhanced-dom/dom'
 import classNames from 'classnames'
 import uniqueId from 'lodash.uniqueid'
 
