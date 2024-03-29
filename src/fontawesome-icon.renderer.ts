@@ -1,7 +1,10 @@
-import { icon, type IconDefinition, library as faLib } from '@fortawesome/fontawesome-svg-core'
+import { STYLESHEET_ATTRIBUTE_NAME } from '@enhanced-dom/css'
 import { type IAbstractElement } from '@enhanced-dom/dom'
+import { icon, type IconDefinition, library as faLib, config as faConfig, dom as faDom } from '@fortawesome/fontawesome-svg-core'
 import classNames from 'classnames'
 import uniqueId from 'lodash.uniqueid'
+
+faConfig.autoAddCss = false
 
 const concatenateStyles = (...styles: string[]) => {
   const meaningfulStyles = styles.filter((s) => !!s)
@@ -24,7 +27,7 @@ export class FontawesomeIconRenderer {
     title?: string
     style?: string
     class?: string
-  }) => {
+  }): IAbstractElement[] => {
     faLib.add(config)
     const renderedIcon = icon(config)
 
@@ -50,6 +53,9 @@ export class FontawesomeIconRenderer {
       abstractElement.children.unshift(titleElement)
     }
 
-    return abstractElement
+    return [
+      { tag: 'style', attributes: { [STYLESHEET_ATTRIBUTE_NAME]: 'enhanced-dom-fontawesome' }, children: [{ content: faDom.css() }] },
+      abstractElement,
+    ]
   }
 }
